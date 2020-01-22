@@ -22,5 +22,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('stories.urls', namespace='stories')),
     path('account/', include('accounts.urls', namespace='accounts')),
+    path('social-accounts/', include('allauth.urls')),
+    path('djrichtextfield/', include('djrichtextfield.urls'))
+]
 
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

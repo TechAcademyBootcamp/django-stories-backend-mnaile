@@ -37,9 +37,20 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'djrichtextfield',
     'stories.apps.StoriesConfig',
     'accounts',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+
+    'allauth.socialaccount.providers.facebook',
 ]
+
+SITE_ID = 1
+
 AUTH_USER_MODEL = 'accounts.User'
 
 
@@ -56,6 +67,7 @@ from django.urls import reverse_lazy
 
 ROOT_URLCONF = 'food_stories.urls'
 LOGIN_REDIRECT_URL = reverse_lazy('stories:home')
+LOGOUT_REDIRECT_URL = reverse_lazy('accounts:login')
 
 TEMPLATES = [
     {
@@ -73,7 +85,28 @@ TEMPLATES = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+DJRICHTEXTFIELD_CONFIG = {
+    'js': ['//tinymce.cachefly.net/4.1/tinymce.min.js'],
+    'init_template': 'djrichtextfield/init/tinymce.js',
+    'settings': {
+        'menubar': False,
+        'plugins': 'link image',
+        'toolbar': 'bold italic | link image | removeformat',
+        'width': 400
+    }
+}
+
 WSGI_APPLICATION = 'food_stories.wsgi.application'
+
+
 
 
 # Database

@@ -41,9 +41,10 @@ class CreateStory(forms.ModelForm):
     )
     description = forms.CharField(
         max_length=1000,
-        widget=forms.TextInput(attrs={
+        widget=forms.Textarea(attrs={
            'placeholder': 'Description',
-            'class': 'form-control' 
+           'class': 'form-control'
+             
         })
     )
     category = forms.ModelChoiceField(queryset=Category.objects.all(), widget=forms.Select(attrs={
@@ -65,8 +66,15 @@ class CreateRecipe(forms.ModelForm):
     )
     description = forms.CharField(
         max_length=1000,
-        widget=forms.TextInput(attrs={
+        widget=forms.Textarea(attrs={
            'placeholder': 'Description',
+            'class': 'form-control' 
+        })
+    )
+    long_description = forms.CharField(
+        max_length=1000,
+        widget=forms.Textarea(attrs={
+           'placeholder': 'Long description',
             'class': 'form-control' 
         })
     )

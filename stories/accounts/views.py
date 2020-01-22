@@ -27,7 +27,7 @@ def change_password(request):
 class ChangePasswordView(PasswordChangeView):
     template_name = 'change_password.html'
     form_class = ChangePassword
-    success_url = reverse_lazy('accounts:login')
+    success_url = reverse_lazy('stories:logout')
 
 class ForgetPassword(PasswordResetView):
     template_name= "forget_password.html" 

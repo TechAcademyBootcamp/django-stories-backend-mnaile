@@ -27,12 +27,12 @@
                     {% for story in stories_list %}
                     <div class="col-md-4 ftco-animate">
                         <div class="blog-entry">
-                            <a href="single.html" class="img-2"><img src="{{story.image.url}}" class="img-fluid"                                                                              alt="Colorlib Template"></a>
+                            <a href="{% url 'stories:storysingle' story.id %}l" class="img-2"><img src="{{story.image.url}}" class="img-fluid"                                                                              alt="Colorlib Template"></a>
                             <div class="text pt-3">
                                 <p class="meta d-flex"><span class="pr-3">{{story.category.title}}</span><span class="ml-auto pl-3">{{story.created_at|date:"F d, Y"}}</span>
                                 </p>
-                                <h3><a href="single.html">{{story.title}}</a></h3>
-                                <p class="mb-0"><a href="single.html" class="btn btn-black py-2">Read More <span
+                                <h3><a href="{% url 'stories:storysingle' story.id %}">{{story.title}}</a></h3>
+                                <p class="mb-0"><a href="{% url 'stories:storysingle' story.id %}" class="btn btn-black py-2">Read More <span
                                         class="icon-arrow_forward ml-4"></span></a></p>
                             </div>
                         </div>

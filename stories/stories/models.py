@@ -1,4 +1,5 @@
 from django.db import models
+from djrichtextfield.models import RichTextField
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
@@ -61,6 +62,7 @@ class Story(models.Model):
     image = models.ImageField(upload_to='stories/')
     title = models.CharField(max_length=50)
     description = models.CharField(max_length=250)
+    long_description = RichTextField('long description')
 
      #moderator
     created_at = models.DateTimeField(auto_now_add=True)
@@ -72,12 +74,15 @@ class Story(models.Model):
 class Recipe(models.Model):
     #relation
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
     
 
     #information
     image = models.ImageField(upload_to='recipes/')
     title = models.CharField(max_length=50)
-    description = models.CharField(max_length=250)
+    description = models.TextField(blank=False)
+    long_description = RichTextField('long description')
+    
 
     #moderator
     created_at = models.DateTimeField(auto_now_add=True)

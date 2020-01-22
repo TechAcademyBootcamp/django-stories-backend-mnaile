@@ -5,6 +5,7 @@ from django.contrib.auth import get_user_model
 from stories.forms import *
 from django.urls import reverse_lazy
 
+
 User = get_user_model()
 
 # Create your views here.
@@ -35,6 +36,7 @@ class UserProfileView(TemplateView):
         context = super().get_context_data()
         if self.request.user.is_authenticated:
             context['stories']= Story.objects.filter(user=self.request.user)
+            context['recipes']= Recipe.objects.filter(user=self.request.user)
         return context
             
 
@@ -124,13 +126,26 @@ class RecipeCreateView(CreateView):
 #     }
 #     return render(request, 'single.html')
 
-class SingleDetailView(DetailView):
+class ResipeSingleDetailView(DetailView):
+    model = Recipe
     template_name = 'single.html'
     context_object_name = 'recipe_data'
-    model = Recipe
 
-#     def get_context_data(self):
-#         context = super().get_context_data()
-#          if self.request.user.is_authenticated:
-#             context['recipes']= Story.objects.filter(user=self.request.user)
-#         return context
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context['categories']= Category.objects.all()
+        context['recipe_detail'] = True
+        return context
+
+
+class StorySingleDetailView(DetailView):
+    model = Story
+    template_name = 'single.html'
+    context_object_name = 'recipe_data'
+    
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context['categories']= Category.objects.all()
+        context['story_detail'] = True
+        return context
